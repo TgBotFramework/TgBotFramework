@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A77A1332-3861-4BD0-ACBA-79B021CDA79E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7E5CECCE-6E31-4C9E-9B87-07A33D41F9D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgBotFramework", "src\TgBotFramework.csproj", "{708875F4-11D9-4D52-BBF3-19F4D474591C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{708875F4-11D9-4D52-BBF3-19F4D474591C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{708875F4-11D9-4D52-BBF3-19F4D474591C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{708875F4-11D9-4D52-BBF3-19F4D474591C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{708875F4-11D9-4D52-BBF3-19F4D474591C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{708875F4-11D9-4D52-BBF3-19F4D474591C} = {A77A1332-3861-4BD0-ACBA-79B021CDA79E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB5A823B-CF68-4336-BF4D-854C8DB4AE36}
+	EndGlobalSection
+EndGlobal
