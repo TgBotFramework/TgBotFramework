@@ -1,7 +1,6 @@
 # TgBotFramework
 [![package](https://img.shields.io/nuget/v/TgBotFramework)](https://www.nuget.org/packages/TgBotFramework/)
 [![licence](https://img.shields.io/github/license/TgBotFramework/TgBotFramework)]()
-
 ![Lines of code](https://img.shields.io/tokei/lines/github/TgBotFramework/TgBotFramework)
 
 Make [Telegram.Bot.Framework](https://github.com/TelegramBots/Telegram.Bot.Framework) great again!
