@@ -25,6 +25,6 @@ jobs:
     - name: Publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        PROJECT_FILE_PATH: src/TgBotFramework/TgBotFramework.csproj
+        PROJECT_FILE_PATH: src/TgBotFramework.csproj
         VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
