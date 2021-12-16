@@ -12,7 +12,7 @@ there is nothing that is guarantied to work, but something definitely works ;)
 
 # Whats new?
 
-This project targets .NET 5.0+ and there won`t be any support for Framework. So keep your stack updated =)
+This project targets .NET 6.0+ and there won`t be any support for Framework. So keep your stack updated =)
 
 In this implementation you can get (at least) same pipeline experience as in [Telegram.Bot.Framework](https://github.com/TelegramBots/Telegram.Bot.Framework) but enchanted with:
 
@@ -31,10 +31,10 @@ In this implementation you can get (at least) same pipeline experience as in [Te
 
   
 #Long-term goals
-- [ ] **Dashboard** (un plans: update rate, main exceptions, abilyti to add custom stats, for example number of updates by type/run time)
+- [ ] **Dashboard** (un plans: update rate, main exceptions, ability to add custom stats, for example number of updates by type/run time)
 - [ ] Better **Logging**
 - [ ] Fully tested (I wouldn't count on that one 😭) 
-- [ ] Posibility to run update processing in parallel mode (and smart parallel mode) 
+- [ ] Possibility to run update processing in parallel mode (and smart parallel mode) 
 - [x] Better EF support
 - [x] Caching state/user info. (with EF)
 - [ ] Comments and refactorings

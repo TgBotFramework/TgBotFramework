@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <AssemblyVersion>0.1</AssemblyVersion>
         <FileVersion>0.1</FileVersion>
@@ -15,6 +15,7 @@
         <PackageProjectUrl>https://github.com/TgBotFramework/TgBotFramework</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/TgBotFramework/TgBotFramework/blob/master/LICENSE</PackageLicenseUrl>
         <PackageTags>Telegram Bot Framework</PackageTags>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
