@@ -5,7 +5,7 @@ using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
 {
-    public class BotFramework<TContext> where TContext : IUpdateContext
+    public class BotFramework<TContext> where TContext : UpdateContext
     {
         private readonly BotPipelineBuilder<TContext> _pipeline;
         private UpdateDelegate<TContext> _delegate;

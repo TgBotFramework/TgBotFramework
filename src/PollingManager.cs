@@ -19,20 +19,20 @@ namespace TgBotFramework
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class PollingManager<TContext> : BackgroundService, IPollingManager
-        where TContext : IUpdateContext
+        where TContext : UpdateContext
     {
         private readonly ILogger<PollingManager<TContext>> _logger;
         
         private readonly LongPollingOptions _pollingOptions;
         private readonly IServiceProvider _serviceProvider;
-        private readonly ChannelWriter<IUpdateContext> _channel;
+        private readonly ChannelWriter<UpdateContext> _channel;
         private readonly TelegramBotClient _client;
         
         public PollingManager(
             ILogger<PollingManager<TContext>> logger, 
             LongPollingOptions pollingOptions, 
             BaseBot bot,
-            Channel<IUpdateContext> channel,
+            Channel<UpdateContext> channel,
             IServiceProvider serviceProvider) 
         {
             _logger = logger;
@@ -61,7 +61,7 @@ namespace TgBotFramework
 
                     foreach (var update in updates)
                     {
-                        var updateContext = _serviceProvider.GetService<IUpdateContext>();
+                        var updateContext = _serviceProvider.GetService<UpdateContext>();
 
                         Debug.Assert(updateContext != null, nameof(updateContext) + " != null");
                         updateContext.Update = update;
@@ -84,7 +84,7 @@ namespace TgBotFramework
                 {
                     _logger.LogError(e, "Network Error while polling in " + nameof(PollingManager<TContext>));
                 }
-                catch (TaskCanceledException e)
+                catch (TaskCanceledException)
                 {
                     _logger.LogInformation("Polling is shutting down...");
                 }

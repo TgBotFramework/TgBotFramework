@@ -1,6 +1,6 @@
 namespace TgBotFramework
 {
-    public class BotSettings : IBotSettings
+    public class BotSettings
     {
         public string ApiToken { get; set; }
         public string WebhookDomain { get; set; }

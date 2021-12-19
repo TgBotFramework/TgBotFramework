@@ -32,7 +32,7 @@ namespace TgBotFramework.Tests.Pipeline
 
         public class NullRefHandlerHandler : IUpdateHandler<PipelineTestContext>
         {
-            public async Task HandleAsync(PipelineTestContext context, UpdateDelegate<PipelineTestContext> next, CancellationToken cancellationToken)
+            public Task HandleAsync(PipelineTestContext context, UpdateDelegate<PipelineTestContext> next, CancellationToken cancellationToken)
             {
                 throw new System.Exception();
             }

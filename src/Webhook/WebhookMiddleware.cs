@@ -13,13 +13,13 @@ namespace TgBotFramework.Webhook
     public class WebhookMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ChannelWriter<IUpdateContext> _channel;
+        private readonly ChannelWriter<UpdateContext> _channel;
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<WebhookMiddleware> _logger;
         private readonly WebhookSettings _settings;
 
         public WebhookMiddleware(RequestDelegate next, 
-            Channel<IUpdateContext> channel, IServiceProvider serviceProvider, ILogger<WebhookMiddleware> logger, WebhookSettings settings)
+            Channel<UpdateContext> channel, IServiceProvider serviceProvider, ILogger<WebhookMiddleware> logger, WebhookSettings settings)
         {
             _next = next;
             _channel = channel.Writer;
@@ -61,7 +61,7 @@ namespace TgBotFramework.Webhook
                 return;
             }
 
-            var ctx = _serviceProvider.GetService<IUpdateContext>();
+            var ctx = _serviceProvider.GetService<UpdateContext>();
             ctx.Update = update;
             await _channel.WriteAsync(ctx);
             if (_settings.WaitForResult)

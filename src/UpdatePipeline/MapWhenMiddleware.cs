@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace TgBotFramework.UpdatePipeline
 {
-    public class MapWhenMiddleware<TContext> : IUpdateHandler<TContext> where TContext : IUpdateContext
+    public class MapWhenMiddleware<TContext> : IUpdateHandler<TContext> where TContext : UpdateContext
     {
         private readonly Predicate<TContext> _predicate;
 

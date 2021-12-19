@@ -6,7 +6,7 @@ namespace TgBotFramework
     /// <summary>
     /// Part of the pipeline. Processes an update
     /// </summary>
-    public interface IUpdateHandler<TContext> where TContext : IUpdateContext
+    public interface IUpdateHandler<TContext> where TContext : UpdateContext
     {
         Task HandleAsync(TContext context, UpdateDelegate<TContext> next, CancellationToken cancellationToken) ;
     }

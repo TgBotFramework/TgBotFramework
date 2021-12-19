@@ -12,7 +12,7 @@ namespace TgBotFramework
     /// <summary>
     /// Base handler implementation for a command such as "/start"
     /// </summary>
-    public abstract class CommandBase<TContext> : IUpdateHandler<TContext> where TContext : IUpdateContext
+    public abstract class CommandBase<TContext> : IUpdateHandler<TContext> where TContext : UpdateContext
     {
         public abstract Task HandleAsync(TContext context, UpdateDelegate<TContext> next, string[] args, CancellationToken cancellationToken);
 
@@ -29,13 +29,16 @@ namespace TgBotFramework
                 throw new ArgumentException("Message is not a command", nameof(message));
 
             var argsList = new List<string>();
-            string allArgs = message.Text.Substring(message.Entities[0].Length).TrimStart();
-            argsList.Add(allArgs);
-
-            var expandedArgs = Regex.Split(allArgs, @"\s+");
-            if (expandedArgs.Length > 1)
+            if (message.Text != null)
             {
-                argsList.AddRange(expandedArgs);
+                string allArgs = message.Text.Substring(message.Entities[0].Length).TrimStart();
+                argsList.Add(allArgs);
+
+                var expandedArgs = Regex.Split(allArgs, @"\s+");
+                if (expandedArgs.Length > 1)
+                {
+                    argsList.AddRange(expandedArgs);
+                }
             }
 
             string[] args = argsList

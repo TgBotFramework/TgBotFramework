@@ -12,22 +12,22 @@ namespace TgBotFramework.UpdateProcessing
 {
     public class SmartProcessing<TBot, TContext> : BackgroundService
         where TBot : BaseBot
-        where TContext : IUpdateContext
+        where TContext : UpdateContext
     {
         private readonly ILogger<SmartProcessing<TBot, TContext>> _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly TBot _bot;
         private readonly BotFramework<TContext> _framework;
-        private readonly ChannelReader<IUpdateContext> _updatesQueue;
-        private readonly Channel<IUpdateContext> PrivateChatUpdateReader = Channel.CreateBounded<IUpdateContext>(50);
-        private readonly Channel<IUpdateContext> PublicChatUpdateReader = Channel.CreateBounded<IUpdateContext>(50);
-        private readonly Channel<IUpdateContext> ChannelUpdateReader = Channel.CreateBounded<IUpdateContext>(50);
-        private readonly Channel<IUpdateContext> NoChatUpdateReader = Channel.CreateBounded<IUpdateContext>(50);
-        private readonly Channel<IUpdateContext> InlineQueryUpdateReader = Channel.CreateBounded<IUpdateContext>(50);
+        private readonly ChannelReader<UpdateContext> _updatesQueue;
+        private readonly Channel<UpdateContext> PrivateChatUpdateReader = Channel.CreateBounded<UpdateContext>(50);
+        private readonly Channel<UpdateContext> PublicChatUpdateReader = Channel.CreateBounded<UpdateContext>(50);
+        private readonly Channel<UpdateContext> ChannelUpdateReader = Channel.CreateBounded<UpdateContext>(50);
+        private readonly Channel<UpdateContext> NoChatUpdateReader = Channel.CreateBounded<UpdateContext>(50);
+        private readonly Channel<UpdateContext> InlineQueryUpdateReader = Channel.CreateBounded<UpdateContext>(50);
 
         public SmartProcessing(ILogger<SmartProcessing<TBot, TContext>> logger,
             IServiceProvider serviceProvider,
-            Channel<IUpdateContext> updatesQueue,
+            Channel<UpdateContext> updatesQueue,
             TBot bot,
             BotFramework<TContext> framework)
         {
@@ -86,7 +86,7 @@ namespace TgBotFramework.UpdateProcessing
             }
         }
 
-        private async Task StartChannel(Channel<IUpdateContext> channel, CancellationToken stoppingToken)
+        private async Task StartChannel(Channel<UpdateContext> channel, CancellationToken stoppingToken)
         {
             await Task.Yield();
             await foreach (var update in channel.Reader.ReadAllAsync(stoppingToken))

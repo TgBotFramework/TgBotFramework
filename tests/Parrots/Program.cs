@@ -17,7 +17,7 @@ await Host.CreateDefaultBuilder().ConfigureServices(services =>
 
 
 
-public class ExampleContext : BaseUpdateContext { }
+public class ExampleContext : UpdateContext { }
 public class ConsoleEchoHandler : IUpdateHandler<ExampleContext>
 {
     public async Task HandleAsync(ExampleContext context, UpdateDelegate<ExampleContext> next, CancellationToken cancellationToken)

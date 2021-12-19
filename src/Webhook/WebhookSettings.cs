@@ -37,7 +37,7 @@ namespace TgBotFramework.Webhook
         /// <summary>
         /// The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
         /// </summary>
-        public string? IpAddress { get; set; }
+        public string IpAddress { get; set; }
         
         /// <summary>
         /// Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to <i>40</i>. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput
