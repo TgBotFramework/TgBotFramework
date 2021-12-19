@@ -25,7 +25,7 @@ namespace TgBotFramework
         }
         public ChatId ChatId
         {
-            get => Chat.Id;
+            get => Chat?.Id;
         }
 
         private User _sender = null;
@@ -34,9 +34,9 @@ namespace TgBotFramework
             get => _sender ??= Update.GetSender();
         }
 
-        public long SenderId
+        public long? SenderId
         {
-            get => Sender.Id;
+            get => Sender?.Id;
         }
 
     }
