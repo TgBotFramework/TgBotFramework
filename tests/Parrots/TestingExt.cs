@@ -3,7 +3,6 @@ using System.Threading.Channels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Telegram.Bot;
 using Telegram.Bot.Types;
 using TgBotFramework;
 
@@ -46,10 +45,11 @@ public class UpdateProducer<TContext> : BackgroundService, IPollingManager
         while (counter < 20_000)
         {
             var context = _serviceProvider.GetService<TContext>();
-            context.Update = new Update() { Id = counter++ };
-            await _channel.WriteAsync(context);
+            context!.Update = new Update() { Id = counter++ };
+            await _channel.WriteAsync(context, stoppingToken);
         }
         sw.Stop();
+        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
         _logger.LogInformation(sw.ElapsedMilliseconds.ToString());
     }
 }

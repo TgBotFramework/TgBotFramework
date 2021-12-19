@@ -26,7 +26,9 @@ namespace TgBotFramework
         {
             Services = services;
             Services.AddTransient<TContext>();
-            Services.AddTransient<UpdateContext>(x => x.GetService<TContext>());
+            if(typeof(TContext) != typeof(UpdateContext))
+                Services.AddTransient<UpdateContext>(x => x.GetService<TContext>());
+            
             Services.AddSingleton(Channel.CreateBounded<UpdateContext>(
                 new BoundedChannelOptions(100)
                 {

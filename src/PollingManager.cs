@@ -84,7 +84,7 @@ namespace TgBotFramework
                 {
                     _logger.LogError(e, "Network Error while polling in " + nameof(PollingManager<TContext>));
                 }
-                catch (TaskCanceledException e)
+                catch (TaskCanceledException)
                 {
                     _logger.LogInformation("Polling is shutting down...");
                 }
