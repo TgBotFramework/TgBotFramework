@@ -17,11 +17,27 @@ namespace TgBotFramework
         public BaseBot Bot { get; set; }
         public TelegramBotClient Client { get; set; }
 
+        
         private Chat _chat = null;
-
         public Chat Chat
         {
             get { return _chat ??= Update.GetChat(); }
         }
+        public ChatId ChatId
+        {
+            get => Chat.Id;
+        }
+
+        private User _sender = null;
+        public User Sender
+        {
+            get => _sender ??= Update.GetSender();
+        }
+
+        public long SenderId
+        {
+            get => Sender.Id;
+        }
+
     }
 }

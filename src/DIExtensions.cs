@@ -31,7 +31,6 @@ namespace TgBotFramework
             var builder = new BotFrameworkBuilder<TContext, TBot>(services);
             configure(builder);
             
-            // update processor
             switch (builder.ParallelMode)
             {
                 case ParallelMode.SingleThreaded:
