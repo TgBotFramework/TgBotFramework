@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace TgBotFramework.Tests.Pipeline
 {
-    public class PipelineTestContext : IUpdateContext
+    public class PipelineTestContext : UpdateContext
     {
         public string TestString { get; set; }
         public Update Update { get; set; }

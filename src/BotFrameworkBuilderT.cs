@@ -13,11 +13,11 @@ using TgBotFramework.UpdateProcessing;
 namespace TgBotFramework
 {
     public class BotFrameworkBuilder<TContext, TBot> : IBotFrameworkBuilder<TContext>
-        where TContext : class, IUpdateContext
+        where TContext : UpdateContext
         where TBot : BaseBot
     {
         public IServiceCollection Services { get; set; }
-        public IUpdateContext Context { get; set; }
+        public UpdateContext Context { get; set; }
         public ParallelMode ParallelMode { get; set; }
         public BotPipelineBuilder<TContext> Pipeline { get; set; }
         
@@ -26,8 +26,8 @@ namespace TgBotFramework
         {
             Services = services;
             Services.AddTransient<TContext>();
-            Services.AddTransient<IUpdateContext>(x => x.GetService<TContext>());
-            Services.AddSingleton(Channel.CreateBounded<IUpdateContext>(
+            Services.AddTransient<UpdateContext>(x => x.GetService<TContext>());
+            Services.AddSingleton(Channel.CreateBounded<UpdateContext>(
                 new BoundedChannelOptions(100)
                 {
                     SingleReader = true

@@ -8,10 +8,10 @@ using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
 {
-    public interface IBotFrameworkBuilder<TContext> where TContext : IUpdateContext
+    public interface IBotFrameworkBuilder<TContext> where TContext : UpdateContext
     {
         IServiceCollection Services { get; }
-        IUpdateContext Context { get; set; }
+        UpdateContext Context { get; set; }
         BotPipelineBuilder<TContext> Pipeline { get; set; }
         ParallelMode ParallelMode { get; set; }
 

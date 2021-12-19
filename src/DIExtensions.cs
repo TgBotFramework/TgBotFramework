@@ -26,7 +26,7 @@ namespace TgBotFramework
         public static IServiceCollection AddBotService<TBot, TContext>
             (this IServiceCollection services, Action<IBotFrameworkBuilder<TContext>> configure) 
             where TBot : BaseBot
-            where TContext : class, IUpdateContext
+            where TContext : UpdateContext
         {
             var builder = new BotFrameworkBuilder<TContext, TBot>(services);
             configure(builder);
@@ -62,7 +62,7 @@ namespace TgBotFramework
         /// <returns></returns>
         public static IServiceCollection AddBotService<TContext>
             (this IServiceCollection services, string botToken, Action<IBotFrameworkBuilder<TContext>> configure)
-            where TContext : class, IUpdateContext 
+            where TContext : UpdateContext 
         {
             services.AddSingleton<IOptions<BotSettings>>(Options.Create(new BotSettings(){ ApiToken = botToken} ));
 

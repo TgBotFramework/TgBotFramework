@@ -13,7 +13,7 @@ using TgBotFramework.Exceptions;
 namespace TgBotFramework.UpdatePipeline
 {
     public class BotPipelineBuilder<TContext> : IBotPipelineBuilder<TContext>
-        where TContext : IUpdateContext
+        where TContext : UpdateContext
     {
         public ServiceCollection ServiceCollection { get; }
         private UpdateDelegate<TContext> UpdateDelegate { get; set; }
@@ -23,6 +23,7 @@ namespace TgBotFramework.UpdatePipeline
         public BotPipelineBuilder(ServiceCollection serviceCollection)
         {
             ServiceCollection = serviceCollection ?? throw new ArgumentNullException(nameof(serviceCollection));
+            
             Components = new List<Func<UpdateDelegate<TContext>, UpdateDelegate<TContext>>>();
         }
 
@@ -43,6 +44,8 @@ namespace TgBotFramework.UpdatePipeline
 
         public IBotPipelineBuilder<TContext> Use(Func<UpdateDelegate<TContext>, UpdateDelegate<TContext>> middleware)
         {
+            if (middleware == null) throw new ArgumentNullException(nameof(middleware));
+            
             Components.Add(middleware);
             return this;
         }
@@ -145,6 +148,9 @@ namespace TgBotFramework.UpdatePipeline
             Predicate<TContext> predicate,
             Action<IBotPipelineBuilder<TContext>> configure)
         {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (configure == null) throw new ArgumentNullException(nameof(configure));
+            
             var branchBuilder = new BotPipelineBuilder<TContext>(ServiceCollection);
             configure(branchBuilder);
             UpdateDelegate<TContext> branchDelegate = branchBuilder.Build();
@@ -160,6 +166,8 @@ namespace TgBotFramework.UpdatePipeline
         )
             where THandler : IUpdateHandler<TContext>
         {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            
             ServiceCollection.TryAddScoped(typeof(THandler));
             var branchDelegate = new BotPipelineBuilder<TContext>(ServiceCollection).Use<THandler>().Build();
             Use(new UseWhenMiddleware<TContext>(predicate, branchDelegate));
@@ -171,6 +179,9 @@ namespace TgBotFramework.UpdatePipeline
             Predicate<TContext> predicate,
             Action<IBotPipelineBuilder<TContext>> configure)
         {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (configure == null) throw new ArgumentNullException(nameof(configure));
+            
             var mapBuilder = new BotPipelineBuilder<TContext>(ServiceCollection);
             configure(mapBuilder);
             var mapDelegate = mapBuilder.Build();
@@ -184,6 +195,8 @@ namespace TgBotFramework.UpdatePipeline
             Predicate<TContext> predicate)
             where THandler : IUpdateHandler<TContext>
         {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            
             ServiceCollection.TryAddScoped(typeof(THandler));
             var branchDelegate = new BotPipelineBuilder<TContext>(ServiceCollection).Use<THandler>().Build();
 
@@ -197,6 +210,9 @@ namespace TgBotFramework.UpdatePipeline
         )
             where TCommand : CommandBase<TContext>
         {
+            if (string.IsNullOrWhiteSpace(command) || command.StartsWith("/"))
+                throw new ArgumentException("Command text shouldn't be null, empty or starts with /");
+            
             return MapWhen(
                     ctx => ctx.Bot.CanHandleCommand(command, ctx.Update.Message),
                     botBuilder => botBuilder.Use<TCommand>()

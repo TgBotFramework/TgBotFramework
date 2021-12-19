@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TgBotFramework.UpdatePipeline
 {
-    public interface IBotPipelineBuilder<TContext> where TContext : IUpdateContext
+    public interface IBotPipelineBuilder<TContext> where TContext : UpdateContext
     {
         ServiceCollection ServiceCollection { get; }
         ICollection<Func<UpdateDelegate<TContext>, UpdateDelegate<TContext>>> Components { get; set; }

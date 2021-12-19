@@ -11,7 +11,7 @@ namespace Parrots;
 
 public static class TestingExt
 {
-    public static IBotFrameworkBuilder<TContext> AddTestingUpdateProducer<TContext>(this IBotFrameworkBuilder<TContext> bot, ParallelMode mode) where TContext : IUpdateContext
+    public static IBotFrameworkBuilder<TContext> AddTestingUpdateProducer<TContext>(this IBotFrameworkBuilder<TContext> bot, ParallelMode mode) where TContext : UpdateContext
     {
         bot.ParallelMode = mode;
         bot.Services.AddHostedService<UpdateProducer<TContext>>();
@@ -20,15 +20,15 @@ public static class TestingExt
 }
 
 public class UpdateProducer<TContext> : BackgroundService, IPollingManager
-    where TContext : IUpdateContext
+    where TContext : UpdateContext
 {
     private readonly ILogger<UpdateProducer<TContext>> _logger;
     private readonly IServiceProvider _serviceProvider;
-    private readonly ChannelWriter<IUpdateContext> _channel;
+    private readonly ChannelWriter<UpdateContext> _channel;
         
     public UpdateProducer(
         ILogger<UpdateProducer<TContext>> logger, 
-        Channel<IUpdateContext> channel,
+        Channel<UpdateContext> channel,
         IServiceProvider serviceProvider) 
     {
         _logger = logger;

@@ -12,7 +12,7 @@ namespace TgBotFramework.Webhook
     public static class WebhookExtension
     {
         public static IBotFrameworkBuilder<TContext> UseWebhook<TContext>(this IBotFrameworkBuilder<TContext> builder,
-            WebhookSettings webhookSettings) where TContext : IUpdateContext
+            WebhookSettings webhookSettings) where TContext : UpdateContext
         {
             builder.Services.AddSingleton<WebhookSettings>(webhookSettings);
 

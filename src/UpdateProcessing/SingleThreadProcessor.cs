@@ -10,17 +10,17 @@ namespace TgBotFramework.UpdateProcessing
 {
     public class SingleThreadProcessor<TBot, TContext> : BackgroundService  
         where TBot : BaseBot
-        where TContext : IUpdateContext 
+        where TContext : UpdateContext 
     {
         private readonly ILogger<SingleThreadProcessor<TBot, TContext>> _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly TBot _bot;
         private readonly BotFramework<TContext> _framework;
-        private readonly ChannelReader<IUpdateContext> _updatesQueue;
+        private readonly ChannelReader<UpdateContext> _updatesQueue;
 
         public SingleThreadProcessor(ILogger<SingleThreadProcessor<TBot, TContext>> logger,
             IServiceProvider serviceProvider,
-            Channel<IUpdateContext> updatesQueue, 
+            Channel<UpdateContext> updatesQueue, 
             TBot bot, 
             BotFramework<TContext> framework
             ) 

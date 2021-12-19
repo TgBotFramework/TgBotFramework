@@ -9,7 +9,7 @@ namespace TgBotFramework
     {
         public static IBotFrameworkBuilder<TContext> UseLongPolling<TContext>(this IBotFrameworkBuilder<TContext> bot, ParallelMode mode = ParallelMode.SingleThreaded,
             LongPollingOptions longPollingOptions = null)
-            where TContext : IUpdateContext
+            where TContext : UpdateContext
         {
             longPollingOptions ??= new LongPollingOptions();
             bot.ParallelMode = mode;

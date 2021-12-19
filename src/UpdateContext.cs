@@ -2,13 +2,13 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using TgBotFramework.WrapperExtensions;
 
 namespace TgBotFramework
 {
-    public class BaseUpdateContext : IUpdateContext
+    public class UpdateContext
     {
         public Update Update { get; set; }
         public HttpContext HttpContext { get; set; }
@@ -16,5 +16,12 @@ namespace TgBotFramework
         public TaskCompletionSource Result { get; set; }
         public BaseBot Bot { get; set; }
         public TelegramBotClient Client { get; set; }
+
+        private Chat _chat = null;
+
+        public Chat Chat
+        {
+            get { return _chat ??= Update.GetChat(); }
+        }
     }
 }
