@@ -32,7 +32,7 @@ using Microsoft.Extensions.Hosting;
 
 await Host.CreateDefaultBuilder().ConfigureServices(services =>
 {
-    services.
+    //insert bot service code here
 }).RunConsoleAsync(); 
 ```
 "services" is your IServiceCollection that we'll use. 
