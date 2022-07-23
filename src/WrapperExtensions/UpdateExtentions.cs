@@ -45,6 +45,8 @@ namespace TgBotFramework.WrapperExtensions
                     return update.ChatMember.From.Id;
                 case UpdateType.MyChatMember:
                     return update.MyChatMember.From.Id;
+                case UpdateType.ChatJoinRequest:
+                    return update.ChatJoinRequest.From.Id;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -88,6 +90,8 @@ namespace TgBotFramework.WrapperExtensions
                     return update.ChatMember.From;
                 case UpdateType.MyChatMember:
                     return update.MyChatMember.From;
+                case UpdateType.ChatJoinRequest:
+                    return update.ChatJoinRequest.From;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -117,6 +121,8 @@ namespace TgBotFramework.WrapperExtensions
                     return update.ChatMember.Chat;
                 case UpdateType.MyChatMember:
                     return update.MyChatMember.Chat;
+                case UpdateType.ChatJoinRequest:
+                    return update.ChatJoinRequest.Chat;
                 case UpdateType.Unknown:
                 case UpdateType.InlineQuery:
                 case UpdateType.ChosenInlineResult:

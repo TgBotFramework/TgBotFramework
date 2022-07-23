@@ -1,19 +1,16 @@
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
-using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
 {
@@ -45,13 +42,14 @@ namespace TgBotFramework
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             await _client.DeleteWebhookAsync(cancellationToken: cancellationToken, dropPendingUpdates: _pollingOptions.DropPendingUpdates);
-            
             if (_pollingOptions.DebugOutput)
             {
                 _client.OnApiResponseReceived += ReceiveLogger;
             }
 
             int messageOffset = 0;
+            if (_pollingOptions.DropPendingUpdates)
+                messageOffset = -1;
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
@@ -79,6 +77,8 @@ namespace TgBotFramework
                 catch (ApiRequestException e)
                 {
                     _logger.LogError(e, "API Error in polling " + nameof(PollingManager<TContext>));
+                    if(e.Message == "Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first")
+                        return;
                 }
                 catch (RequestException e)
                 {
@@ -97,10 +97,16 @@ namespace TgBotFramework
 
         private async ValueTask ReceiveLogger(ITelegramBotClient client, ApiResponseEventArgs args, CancellationToken token)
         {
-            if (args.ApiRequestEventArgs.MethodName == "getUpdates")
+            if (args.ApiRequestEventArgs.Request.MethodName == "getUpdates")
             {
                 var message = await args.ResponseMessage.Content.ReadAsStringAsync(token);
-                JToken jObj = JObject.Parse(message)["result"]; 
+                JToken jObj = JObject.Parse(message)["result"];
+                if (jObj == null)
+                {
+                    _logger.LogInformation(message);
+                    return;
+                }
+
                 foreach (var item in jObj)
                 {
                     _logger.LogInformation("[{0}] Content:\n{1}", item["update_id"].ToString(), item);

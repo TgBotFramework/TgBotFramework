@@ -1,4 +1,5 @@
 using System;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace TgBotFramework
@@ -19,5 +20,6 @@ namespace TgBotFramework
         public static bool EditedChannelPost(UpdateContext context) => context.Update.Type == UpdateType.EditedChannelPost;
         public static bool MyChatMember(UpdateContext context) => context.Update.Type == UpdateType.MyChatMember;
         public static bool PreCheckoutQuery(UpdateContext context) => context.Update.Type == UpdateType.PreCheckoutQuery;
+        public static bool ChatJoinRequest(UpdateContext context) => context.Update.Type == UpdateType.ChatJoinRequest;
     }
 }

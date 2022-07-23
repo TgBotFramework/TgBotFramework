@@ -36,8 +36,8 @@ namespace TgBotFramework
         public BaseBot(IOptions<BotSettings> options)
         {
             Token = options.Value.ApiToken;
-            Client = new TelegramBotClient(options.Value.ApiToken, baseUrl: options.Value.BaseUrl);
-            Username = options.Value.Username;
+            Client = new TelegramBotClient(options.Value.ApiToken); //fix base address adding
+            Username = options.Value.Username ?? Client.GetMeAsync().GetAwaiter().GetResult().Username;
         }
 
         public BaseBot(string token, string username = null)

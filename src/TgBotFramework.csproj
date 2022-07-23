@@ -5,7 +5,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <AssemblyVersion>0.1</AssemblyVersion>
         <FileVersion>0.1</FileVersion>
-        <PackageVersion>0.5.2</PackageVersion>
+        <PackageVersion>0.5.3</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Copyright>(с) TgBotFramework</Copyright>
         <RepositoryUrl>https://github.com/TgBotFramework/TgBotFramework</RepositoryUrl>
@@ -24,7 +24,8 @@
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-      <PackageReference Include="Telegram.Bot" Version="17.0.0" />
+      <PackageReference Include="Telegram.Bot" Version="18.0.0" />
     </ItemGroup>
+
 
 </Project>
