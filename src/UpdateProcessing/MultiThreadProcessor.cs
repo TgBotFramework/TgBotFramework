@@ -46,8 +46,7 @@ namespace TgBotFramework.UpdateProcessing
                     _logger.LogInformation("MultiThreadProcessor stops work");
                     return;
                 }
-#pragma warning disable CS4014
-                Task.Factory.StartNew(async () =>
+                Task.Run(async () =>
                 {
                     using var scope = _serviceProvider.CreateScope();
                     update.Services = scope.ServiceProvider;
@@ -56,14 +55,14 @@ namespace TgBotFramework.UpdateProcessing
                     await _framework.Execute((TContext)update, stoppingToken);
                     if (update.Result != null)
                     {
-                        update.Result.TrySetResult();
+                        update.Result.TrySetResult(true);
                     }
                 }, stoppingToken).ContinueWith((task, o) =>
                     {
                         if(task.IsFaulted)
                             _logger.LogCritical(task.Exception, "Oops");
                     }, TaskContinuationOptions.OnlyOnFaulted, stoppingToken);
-#pragma warning restore CS4014
+
             }
         }
     }

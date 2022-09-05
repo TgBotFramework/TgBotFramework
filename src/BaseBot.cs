@@ -1,20 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
-using Telegram.Bot.Args;
-using Telegram.Bot.Requests.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.InputFiles;
-using Telegram.Bot.Types.Payments;
-using Telegram.Bot.Types.ReplyMarkups;
 using File = Telegram.Bot.Types.File;
 
 namespace TgBotFramework

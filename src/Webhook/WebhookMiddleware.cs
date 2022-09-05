@@ -67,7 +67,7 @@ namespace TgBotFramework.Webhook
             if (_settings.WaitForResult)
             {
                 ctx.HttpContext = context;
-                ctx.Result = new TaskCompletionSource();
+                ctx.Result = new TaskCompletionSource<bool>();
                 //await ctx.Result.Task;
                 await Task.WhenAny(ctx.Result.Task, Task.Delay(2000));
             }

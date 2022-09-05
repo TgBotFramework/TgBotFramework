@@ -69,20 +69,20 @@ namespace TgBotFramework
 
                         if (_pollingOptions.WaitForResult)
                         {
-                            updateContext.Result = new TaskCompletionSource();
+                            updateContext.Result = new TaskCompletionSource<bool>();
                             await updateContext.Result.Task;
                         }
                     }
                 }
                 catch (ApiRequestException e)
                 {
-                    _logger.LogError(e, "API Error in polling " + nameof(PollingManager<TContext>));
+                    _logger.LogError(e, "API Error in polling: " + nameof(PollingManager<TContext>));
                     if(e.Message == "Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first")
                         return;
                 }
                 catch (RequestException e)
                 {
-                    _logger.LogError(e, "Network Error while polling in " + nameof(PollingManager<TContext>));
+                    _logger.LogError("Network Error while polling: {e}", e.Message);
                 }
                 catch (TaskCanceledException)
                 {
@@ -99,7 +99,7 @@ namespace TgBotFramework
         {
             if (args.ApiRequestEventArgs.Request.MethodName == "getUpdates")
             {
-                var message = await args.ResponseMessage.Content.ReadAsStringAsync(token);
+                var message = await args.ResponseMessage.Content.ReadAsStringAsync();
                 JToken jObj = JObject.Parse(message)["result"];
                 if (jObj == null)
                 {

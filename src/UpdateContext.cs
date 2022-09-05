@@ -13,12 +13,10 @@ namespace TgBotFramework
         public Update Update { get; set; }
         public HttpContext HttpContext { get; set; }
         public IServiceProvider Services { get; set; }
-        public TaskCompletionSource Result { get; set; }
+        public TaskCompletionSource<bool> Result { get; set; }
         public BaseBot Bot { get; set; }
         public TelegramBotClient Client { get; set; }
 
-        
-        
         private Chat _chat;
         public Chat Chat => _chat ??= Update.GetChat();
         public long? ChatId => Chat?.Id;

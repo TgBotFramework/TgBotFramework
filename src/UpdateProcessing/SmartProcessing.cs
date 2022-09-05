@@ -104,7 +104,7 @@ namespace TgBotFramework.UpdateProcessing
                     await _framework.Execute((TContext)update, stoppingToken);
                     if (update.Result != null)
                     {
-                        Task.Run(() => update.Result.TrySetResult(), stoppingToken);
+                        Task.Run(() => update.Result.TrySetResult(true), stoppingToken);
                     }
                 }
                 catch (Exception e)

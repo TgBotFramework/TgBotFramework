@@ -67,5 +67,22 @@ namespace TgBotFramework
 
             return services.AddBotService<BaseBot, TContext>(configure);
         }
+        
+        /// <summary>
+        /// Adds and configures telegram bot updates processing 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="botToken"></param>
+        /// <param name="configure"></param>
+        /// <typeparam name="TContext">Your context object</typeparam>
+        /// <returns></returns>
+        public static IServiceCollection AddBotService<TContext>
+            (this IServiceCollection services, IOptions<BotSettings> settings, Action<IBotFrameworkBuilder<TContext>> configure)
+            where TContext : UpdateContext 
+        {
+            services.AddSingleton<IOptions<BotSettings>>(settings);
+
+            return services.AddBotService<BaseBot, TContext>(configure);
+        }
     }
 }
