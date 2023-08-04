@@ -39,7 +39,7 @@ namespace TgBotFramework.UpdateProcessing
         {
             await Task.Yield();
             _logger.LogInformation("MultiThreadProcessor starts working");
-            await foreach (var update in _updatesQueue.ReadAllAsync(stoppingToken))
+            await foreach (var update in _updatesQueue.ReadAllAsync(stoppingToken).ConfigureAwait(false))
             {
                 if (stoppingToken.IsCancellationRequested)
                 {

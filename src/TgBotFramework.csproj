@@ -27,7 +27,7 @@
       <PackageReference Include="System.Threading.Channels" Version="6.0.0" />
       <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
       <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-      <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+      <PackageReference Include="Telegram.Bot" Version="19.0.0" />
     </ItemGroup>
 
 
