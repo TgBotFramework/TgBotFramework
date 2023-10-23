@@ -18,11 +18,11 @@ namespace TgBotFramework.Webhook
         /// <summary>
         /// Returns bot domain. Will be set in UseWebhook Method
         /// </summary>
-        public string WebhookDomain { get; internal set; }
+        public string WebhookDomain { get;  set; }
         /// <summary>
         /// Returns bot path. Will be set in UseWebhook Method
         /// </summary>
-        public string WebhookPath { get; internal set; }
+        public string WebhookPath { get;  set; }
 
         /// <summary>
         /// Returns link to webhook.

@@ -22,12 +22,8 @@ namespace TgBotFramework.Webhook
             this IApplicationBuilder app
         )
         {
-            var options = app.ApplicationServices.GetRequiredService<IOptions<BotSettings>>() ??
-                          throw new FrameworkException("There is no settings");
             var settings = app.ApplicationServices.GetService<WebhookSettings>() ??
                            throw new FrameworkException("You should add .UseWebhook method during framework creation");
-            settings.WebhookDomain = options.Value.WebhookDomain;
-            settings.WebhookPath = options.Value.WebhookPath;
 
             if (settings.WebhookDomain == null || settings.WebhookPath == null)
             {
@@ -35,7 +31,7 @@ namespace TgBotFramework.Webhook
             }
             
             app.Map(
-                options.Value.WebhookPath,
+                settings.WebhookPath,
                 builder =>
                     builder.UseMiddleware<WebhookMiddleware>()
             );
