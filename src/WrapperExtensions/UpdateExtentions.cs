@@ -110,7 +110,7 @@ namespace TgBotFramework.WrapperExtensions
                 case UpdateType.Message:
                     return update.Message.Chat;
                 case UpdateType.CallbackQuery:
-                    return update.CallbackQuery.Message.Chat;
+                    return ((Message)update.CallbackQuery.Message)?.Chat;
                 case UpdateType.EditedMessage:
                     return update.EditedMessage.Chat;
                 case UpdateType.ChannelPost:
@@ -144,6 +144,8 @@ namespace TgBotFramework.WrapperExtensions
         /// <returns></returns>
         public static string ToJsonString(this Update update, bool formatted = true)
         {
+            //for new STJ version
+            //return JsonSerializer.Serialize(update, Telegram.Bot.Serialization.JsonSerializerOptionsProvider.Options);
             return JsonConvert.SerializeObject(update, formatted? Formatting.Indented : Formatting.None);
         }
     }
