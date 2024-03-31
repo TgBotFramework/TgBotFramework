@@ -32,7 +32,6 @@ namespace TgBotFramework.Webhook
         {
             if (context.Request.Method != HttpMethods.Post)
             {
-                // in default returns 404
                 await _next.Invoke(context);
                 return;
             }
@@ -41,6 +40,11 @@ namespace TgBotFramework.Webhook
             using (var reader = new StreamReader(context.Request.Body))
             {
                 body = await reader.ReadToEndAsync();
+            }
+
+            if (_settings.DebugOutput)
+            {
+                _logger.LogInformation($"[{DateTime.Now}] {body}");
             }
             
             Update update = null;

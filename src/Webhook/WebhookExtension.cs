@@ -22,12 +22,24 @@ namespace TgBotFramework.Webhook
             this IApplicationBuilder app
         )
         {
-            var settings = app.ApplicationServices.GetService<WebhookSettings>() ??
-                           throw new FrameworkException("You should add .UseWebhook method during framework creation");
+            var settings = app.ApplicationServices.GetService<WebhookSettings>();
+            var options = app.ApplicationServices.GetRequiredService<IOptions<BotSettings>>();
+            if (settings == null && options == null)
+            {
+                throw new FrameworkException("appconfig.json file should contain BaseBot.WebhookDomain AND BaseBot.WebhookPath or you should pass it to WebhookSettings in: \n.UseWebhook(new WebhookSettings(){ .. })");
+            }
 
+            if (settings == null)
+            {
+                settings = new WebhookSettings();
+            }
+            
             if (settings.WebhookDomain == null || settings.WebhookPath == null)
             {
-                throw new FrameworkException("Settings file should contain WebhookDomain AND WebhookPath");
+                settings.WebhookDomain = options.Value.WebhookDomain ?? 
+                      throw new FrameworkException("Settings file should contain WebhookDomain AND WebhookPath");
+                settings.WebhookPath = options.Value.WebhookPath ?? 
+                      throw new FrameworkException("Settings file should contain WebhookDomain AND WebhookPath");
             }
             
             app.Map(
